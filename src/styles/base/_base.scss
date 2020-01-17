@@ -1,0 +1,21 @@
+//rem < better support for accessability than pixels
+//1 rem = 16px
+html{
+  font-size: 62.5%;
+  //this way 1rem = 10 pixels
+}
+
+body{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+  background-color: white;
+}
+
+
+button{
+  cursor: pointer;
+}
+
+button:disabled{
+  cursor: default;
+}
