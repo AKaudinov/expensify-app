@@ -5,7 +5,9 @@ import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import * as ExpenseActions from '../actions/expenses';
 
-const ExpenseListItem = ({expense, dispatch}) => { //destructure expense from props, it comes in as props.expense
+
+//named export so it can be used for testing without being connected to redux store
+export const ExpenseListItem = ({expense, dispatch}) => { //destructure expense from props, it comes in as props.expense
     return (
       <div>
           <Link to={`edit/${expense.id}`}><h2>{expense.description}</h2></Link>
