@@ -5,7 +5,7 @@ import * as expenseActions from '../actions/expenses';
 
 export class EditExpense extends React.Component{
     onSubmit = (expense) => {
-        this.props.editExpense(this.props.match.params.id, expense);
+        this.props.editExpense(this.props.expense.id, expense);
         this.props.history.push('/');
     };
 

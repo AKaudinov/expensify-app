@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import {EditExpense} from "../../components/EditExpense";
 import expenses from "../fixtures/expenses";
 
-let editExpense, removeExpense, history, match, wrapper;
+let editExpense, removeExpense, history, wrapper;
 
 beforeEach(() => {
     editExpense = jest.fn();
@@ -11,17 +11,11 @@ beforeEach(() => {
     history = {
         push: jest.fn()
     };
-    match = {
-        params: {
-            id: expenses[0].id
-        }
-    };
 
     wrapper = shallow(<EditExpense
         expense={expenses[0]}
         editExpense={editExpense}
         removeExpense={removeExpense}
-        match={match}
         history={history}/>)
 });
 
