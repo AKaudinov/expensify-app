@@ -3,7 +3,11 @@
 exports[`Should render ExpensesSummary 1`] = `
 <div>
   <h4>
-    Total expenses: 
+    Viewing 
+    3
+     
+    expenses
+    : 
     $1,939.29
   </h4>
 </div>
@@ -12,8 +16,25 @@ exports[`Should render ExpensesSummary 1`] = `
 exports[`Should render ExpensesSummary with 0 expenses 1`] = `
 <div>
   <h4>
-    Total expenses: 
+    Viewing 
+    0
+     
+    expenses
+    : 
     $0.00
+  </h4>
+</div>
+`;
+
+exports[`Should render ExpensesSummary with 1 expense 1`] = `
+<div>
+  <h4>
+    Viewing 
+    1
+     
+    expense
+    : 
+    $1.95
   </h4>
 </div>
 `;
