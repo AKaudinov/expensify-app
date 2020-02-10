@@ -11,7 +11,7 @@ module.exports = (env) => {
     return {
         entry: './src/app.js', // where to start
         output: {
-            path: path.join(__dirname, 'public'), //absolute path to where to output the bundle file, use __dirname to provide the path to the project
+            path: path.join(__dirname, 'public', 'dist'), //absolute path to where to output the bundle file, use __dirname to provide the path to the project
             //use node path module to join it to the __dirname
             filename: 'bundle.js'
         },
@@ -61,7 +61,8 @@ module.exports = (env) => {
         //as full source map
         devServer:{ //dev server of webpack which can look for changes
             historyApiFallback: true, //routing is handled via client side code
-            contentBase: path.join(__dirname, 'public')//webpack dev server needs to know where your public assets are, so it can serve them up
+            contentBase: path.join(__dirname, 'public'),//webpack dev server needs to know where your public assets are, so it can serve them up
+            publicPath: '/dist/' //lets you specify where the bundled assets should live
             //no webpack --watch command would be necessary
             //webpack-dev-server can be ran as a script inside package.json
             //it will execute webpack configuration and run everything, and be running in its own watch mode(live reload)
