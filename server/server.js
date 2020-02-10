@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express(); //express application
 const publicPath = path.join(__dirname, '..', 'public'); //go up a directory, and then navigate to the public folder
-const port = process.evn.PORT || 3000; //get the port environment variable that heroku provides or just use 3000
+const port = process.env.PORT || 3000; //get the port environment variable that heroku provides or just use 3000
 
 app.use(express.static(publicPath)); //something that runs for each request - serve up the files from publicPath
 
