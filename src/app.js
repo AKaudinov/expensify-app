@@ -11,6 +11,9 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 
+import './firebase/firebase'; //execute firebase
+
+
 const store = configureStore(); //gives access to the whole store
 
 store.dispatch(expenseActions.addExpense({description: 'Rent', amount: 1600, createdAt: 1000})); //dispatch returns the object it dispatched
