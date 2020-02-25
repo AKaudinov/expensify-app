@@ -147,5 +147,94 @@ const database = firebase.database(); //store database in a const variable
 //FETCH DATA END
 //TWO WAYS to grab data: FETCH data a single time, or subscribe to data changes.
 
+///ARRAY DATA < - firebase stores object children, and not arrays. Firebase doesn't support arrays
+//firebase stores objects of objects
+
+// const firebaseNotes = {
+//   notes: {
+//       asdfd:{
+//           title: 'first note',
+//           body: 'this is my note'
+//       },
+//       asdf:{
+//           title: 'title 2',
+//           body: 'body2'
+//       }
+//   }
+// };
+
+// database.ref('notes').push({
+//     title: 'Course topics',
+//     body: 'react native'
+// }); //push in a value, firebase creates a new property on the notes object
+
+
+// database.ref('notes/-M0xu8mE_AniuKnj0Yza').remove();
+
+
+// const expenses = [
+//     {
+//         title:'coffee',
+//         cost: 3452
+//     },
+//     {
+//         title:'Rent',
+//         cost: 34523
+//     },
+//     {
+//         title:'food',
+//         cost: 21223
+//     },
+// ];
+//
+// expenses.forEach(expense => {
+//     database.ref('expenses').push(expense);
+// });
+
+
+//snapshot foreach lets you iterate over each object that gets returned from the database
+// const expensesSubscription = database.ref('expenses').on('value', snapshot => {
+//     const expenses = [];
+//
+//     snapshot.forEach(fireBaseObj => {
+//         expenses.push({
+//             id: fireBaseObj.key,
+//             ...fireBaseObj.val()
+//         })});
+//
+//     console.log(expenses);
+// });
+
+//child_removed < only fires when one of the expenses gets deleted
+const expensesSubscriptionChildRemoved = database.ref('expenses').on('child_removed', snapshot => {
+    console.log(snapshot.val());
+});
+
+//child_changed < only fires when one of the expenses gets modified
+const expensesSubscriptionChildChanged = database.ref('expenses').on('child_changed', snapshot => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+//child_added < only fires when one of the expenses gets added, once for all the initial children, and then each time a new one gets added
+const expensesSubscriptionChildAdded = database.ref('expenses').on('child_added', snapshot => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+//database.ref('expenses').once('value')
+    // .then(snapshot => {
+    //     const expenses = [];
+    //
+    //     snapshot.forEach(fireBaseObj => {
+    //         expenses.push({
+    //         id: fireBaseObj.key,
+    //         ...fireBaseObj.val()
+    //     })});
+    //
+    //     console.log(expenses);
+    // });
+
+///ARRAY DATA END
+
+
 
 console.log('a call has been made to update the database');
