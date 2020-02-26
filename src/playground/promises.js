@@ -30,3 +30,28 @@ promise.then(data => {
 }, err => {
     console.log(err);
 });
+
+//Promise chaining
+promise.then((data) => {
+    console.log(data);
+}).then(() => {
+    console.log('logged data to the console'); //chained a then to the first then
+}).catch(err => {
+    console.log(err);
+});
+
+
+//Promise chaining
+promise.then((data) => {
+    console.log(data);
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('other resolved data');
+        }, 3000)
+    });
+}).then(() => { //this then will run on the returned promise above
+    console.log('logged data to the console'); //chained a then to the first then
+}).catch(err => {
+    console.log(err);
+});

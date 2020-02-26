@@ -35,7 +35,8 @@ export class AddExpense extends React.Component {
 //similar to state to props
 const mapDispatchToProps = (dispatch) => {
     return {
-        addExpense: (expense) => dispatch(expenseActions.addExpense(expense))
+        addExpense: (expense) => dispatch(expenseActions.startAddExpense(expense))
+            // (expense) => dispatch(expenseActions.addExpense(expense))
     }
 };
 

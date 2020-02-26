@@ -16,6 +16,8 @@ firebase.initializeApp(firebaseConfig); //initialize firebase to
 
 const database = firebase.database(); //store database in a const variable
 
+export {firebase, database as default}; //export database as default, and firebase as a named export
+
 // database.ref().set({ //get reference to the root of db and provide the data you want to set
 //    name: 'AK',
 //     age: '22',
@@ -205,20 +207,20 @@ const database = firebase.database(); //store database in a const variable
 //     console.log(expenses);
 // });
 
-//child_removed < only fires when one of the expenses gets deleted
-const expensesSubscriptionChildRemoved = database.ref('expenses').on('child_removed', snapshot => {
-    console.log(snapshot.val());
-});
-
-//child_changed < only fires when one of the expenses gets modified
-const expensesSubscriptionChildChanged = database.ref('expenses').on('child_changed', snapshot => {
-    console.log(snapshot.key, snapshot.val());
-});
-
-//child_added < only fires when one of the expenses gets added, once for all the initial children, and then each time a new one gets added
-const expensesSubscriptionChildAdded = database.ref('expenses').on('child_added', snapshot => {
-    console.log(snapshot.key, snapshot.val());
-});
+// //child_removed < only fires when one of the expenses gets deleted
+// const expensesSubscriptionChildRemoved = database.ref('expenses').on('child_removed', snapshot => {
+//     console.log(snapshot.val());
+// });
+//
+// //child_changed < only fires when one of the expenses gets modified
+// const expensesSubscriptionChildChanged = database.ref('expenses').on('child_changed', snapshot => {
+//     console.log(snapshot.key, snapshot.val());
+// });
+//
+// //child_added < only fires when one of the expenses gets added, once for all the initial children, and then each time a new one gets added
+// const expensesSubscriptionChildAdded = database.ref('expenses').on('child_added', snapshot => {
+//     console.log(snapshot.key, snapshot.val());
+// });
 
 //database.ref('expenses').once('value')
     // .then(snapshot => {
@@ -237,4 +239,4 @@ const expensesSubscriptionChildAdded = database.ref('expenses').on('child_added'
 
 
 
-console.log('a call has been made to update the database');
+// console.log('a call has been made to update the database');
