@@ -77,3 +77,13 @@ test('should not edit an expense if expense id not found', () => {
     //jest compares objects as well via toEqual
 });
 
+
+test('should get expenses', () => {
+    const GetExpensesAction = {
+        type: 'GET_EXPENSES',
+        expenses: expenses
+    };
+    const newState = expensesReducer([expenses[0]], GetExpensesAction);
+    expect(newState).toEqual(expenses); //should come back with 3 fixture data expenses, not just with one, because
+    //we're returning whatever we get from the action we don't care about the previous state
+});

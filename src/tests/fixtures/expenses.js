@@ -16,7 +16,7 @@ export default [ //export the array by default
         createdAt: moment(0).subtract(4, 'days').valueOf()
     },
     {
-        id:'2',
+        id:'3',
         description: 'Rent',
         note: '',
         amount: 193500,

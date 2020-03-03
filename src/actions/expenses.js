@@ -50,3 +50,29 @@ export const editExpense =(id, updates) => {
         updates: updates
     }
 };
+
+//SET_EXPENSES //GET EXPENSES
+export const getExpenses = (expenses) => {
+    return {
+        type: 'GET_EXPENSES',
+        expenses: expenses
+    }
+};
+
+export const startGetExpenses = () => {
+    return (dispatch) => {
+        const expenses = [];
+        return fireBaseDb.ref('expenses').once('value')
+            //return the promise chain, so we can continue chaining in app.js, because it uses a then on `startGetExpenses` action
+            .then(snapshot => {
+                snapshot.forEach(fireBaseExpense => {
+                    expenses.push({
+                        id: fireBaseExpense.key,
+                        ...fireBaseExpense.val()
+                    })
+                });
+                dispatch(getExpenses(expenses))
+            })
+            .catch(err => console.log(err));
+    };
+};

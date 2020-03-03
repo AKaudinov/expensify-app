@@ -22,6 +22,8 @@ export default (state = expensesReducerDefaultState, action) => {
                     return expense;
                 }
             }); //go through each item and modify the item that matches the provided id
+        case 'GET_EXPENSES':
+            return action.expenses;
         default:
             return state;
     }

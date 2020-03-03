@@ -6,6 +6,17 @@ import fireBaseDb from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([reduxThunk]);
 
+
+beforeEach((done) => {
+    const expensesData = {};
+    expenses.forEach(({id, description, note, amount, createdAt}) => {
+       expensesData[id] = {description, note, amount, createdAt};
+       //destructure all the info from expense, assign an object to the id of the expense
+        //firebase stores objects of objects, and not arrays, that's why
+    });
+   fireBaseDb.ref('expenses').set(expensesData).then(()=> done());
+});
+
 test('Should setup add expense action object with provided values', () => {
     // const expense = {
     //     description: 'rent',
@@ -122,5 +133,26 @@ test('Should setup remove expense object', () => {
     expect(action).toEqual({ //toEqual goes over arrays or objects to compare their properties and see if they're the same
         type: 'REMOVE_EXPENSE',
         id: 'testing123'
+    });
+});
+
+
+test('Should set up get expense action object with data', () => {
+   const action = expenseActions.getExpenses(expenses);
+   expect(action).toEqual({
+       type: 'GET_EXPENSES',
+       expenses: expenses
+   })
+});
+
+test('Should fetch expenses from firebase', (done) => {
+    const store = createMockStore({}); //no data needed in the store
+    store.dispatch(expenseActions.startGetExpenses()).then(data => {
+       const actions = store.getActions(); //get all the actions that were called in order after startGetExpenses action executed
+        expect(actions[0]).toEqual({
+           type: 'GET_EXPENSES',
+           expenses: expenses
+        });
+        done();
     });
 });

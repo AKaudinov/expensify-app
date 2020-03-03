@@ -40,11 +40,11 @@ exports[`should render ExpenseList with expenses 1`] = `
         "amount": 193500,
         "createdAt": 345600000,
         "description": "Rent",
-        "id": "2",
+        "id": "3",
         "note": "",
       }
     }
-    key="2"
+    key="3"
   />
 </div>
 `;

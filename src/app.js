@@ -16,9 +16,9 @@ import './firebase/firebase'; //execute firebase
 
 const store = configureStore(); //gives access to the whole store
 
-store.dispatch(expenseActions.addExpense({description: 'Rent', amount: 1600, createdAt: 1000})); //dispatch returns the object it dispatched
-store.dispatch(expenseActions.addExpense({description: 'Coffee', amount: 300, createdAt: -1000}));
-store.dispatch(expenseActions.addExpense({description: 'Car', amount: 400, createdAt: 1200}));
+// store.dispatch(expenseActions.addExpense({description: 'Rent', amount: 1600, createdAt: 1000})); //dispatch returns the object it dispatched
+// store.dispatch(expenseActions.addExpense({description: 'Coffee', amount: 300, createdAt: -1000}));
+// store.dispatch(expenseActions.addExpense({description: 'Car', amount: 400, createdAt: 1200}));
 // store.dispatch(filterActions.setTextFilter('coffee'));
 //
 // setTimeout(() => {
@@ -31,7 +31,12 @@ const provider = ( //store = to our redux store defined above
         <AppRouter />
     </Provider>
 );
+ReactDOM.render(<h4>Loading...</h4>, document.querySelector("#app"));
 
-ReactDOM.render(provider, document.querySelector("#app"));
+store.dispatch(expenseActions.startGetExpenses()).then(() => {
+    ReactDOM.render(provider, document.querySelector("#app"));
+});
+
+// ReactDOM.render(provider, document.querySelector("#app"));
 //app.js just bootstraps the app
 
