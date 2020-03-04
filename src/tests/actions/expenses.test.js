@@ -156,3 +156,53 @@ test('Should fetch expenses from firebase', (done) => {
         done();
     });
 });
+
+test('Should remove expense from firebase', (done) => {
+   const store = createMockStore({});
+   store.dispatch(expenseActions.startRemoveExpense(expenses[0]))
+       .then(() => {
+           const actions = store.getActions();
+           expect(actions[0]).toEqual({
+               type: 'REMOVE_EXPENSE',
+               id: expenses[0].id
+           });
+
+           fireBaseDb.ref(`expenses/${expenses[0].id}`).once('value')
+               .then(snapshot => {
+                   expect(snapshot.val()).toBeNull();
+               });
+           done();
+       });
+});
+
+test('Should edit an expense in firebase', (done) => {
+   const store = createMockStore({});
+
+   const updates = {
+       description: 'This is an updated expense',
+       amount: 234400
+   };
+
+   store.dispatch(expenseActions.startEditExpense(expenses[0].id, updates))
+       .then(() => {
+           const actions = store.getActions();
+           expect(actions[0]).toEqual({
+               type: 'EDIT_EXPENSE',
+               id: expenses[0].id,
+               updates: updates
+           });
+
+           fireBaseDb.ref(`expenses/${expenses[0].id}`).once('value')
+               .then(snapshot => {
+                    expect(snapshot.val()).toEqual({
+                        id:expenses[0].id,
+                        description: updates.description,
+                        note: '',
+                        amount: updates.amount,
+                        createdAt: expenses[0].createdAt
+                    })
+               });
+
+           done();
+       })
+});

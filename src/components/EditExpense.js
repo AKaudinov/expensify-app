@@ -51,8 +51,8 @@ const mapStateToProps = (state, props) => { //find the expense with the given id
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      editExpense: (id, expense) => dispatch(expenseActions.editExpense(id, expense)),
-        removeExpense: (expense) => dispatch(expenseActions.removeExpense(expense))
+      editExpense: (id, expense) => dispatch(expenseActions.startEditExpense(id, expense)),
+        removeExpense: (expense) => dispatch(expenseActions.startRemoveExpense(expense))
     }
 };
 
