@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render login component 1`] = `
+<div>
+  <form>
+    <input
+      type="text"
+    />
+    <input
+      type="text"
+    />
+    <button
+      onClick={[Function]}
+    >
+      Login
+    </button>
+  </form>
+</div>
+`;

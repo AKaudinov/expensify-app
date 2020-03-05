@@ -12,7 +12,7 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 
 import './firebase/firebase'; //execute firebase
-
+import {firebase} from './firebase/firebase';
 
 const store = configureStore(); //gives access to the whole store
 
@@ -36,6 +36,16 @@ ReactDOM.render(<h4>Loading...</h4>, document.querySelector("#app"));
 store.dispatch(expenseActions.startGetExpenses()).then(() => {
     ReactDOM.render(provider, document.querySelector("#app"));
 });
+
+//this executes when the authenticate state changes, like when somebody logging in or logging out
+firebase.auth().onAuthStateChanged((user) => {
+   if(user){
+       console.log('log in');
+   } else{
+       console.log('log out');
+   }
+});
+
 
 // ReactDOM.render(provider, document.querySelector("#app"));
 //app.js just bootstraps the app

@@ -24,7 +24,11 @@ firebase.initializeApp(firebaseConfig); //initialize firebase to
 
 const database = firebase.database(); //store database in a const variable
 
-export {firebase, database as default}; //export database as default, and firebase as a named export
+//create an instance of provider < this provides authentication
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider(); //<authenticate with google
+googleAuthProvider.setCustomParameters({'prompt': 'select_account'});
+
+export {firebase, googleAuthProvider, database as default}; //export database as default, and firebase as a named export
 
 // database.ref().set({ //get reference to the root of db and provide the data you want to set
 //    name: 'AK',
