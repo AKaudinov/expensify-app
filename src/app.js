@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Switch, Link, NavLink, Route} from 'react-router-dom';
-import AppRouter from "./routers/AppRouter";
+import AppRouter, {history} from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 import * as expenseActions from './actions/expenses';
 import * as filterActions from './actions/filters';
+import * as authActions from './actions/auth';
 import getVisibleExpenses from "./selectors/expenses";
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -31,18 +32,34 @@ const provider = ( //store = to our redux store defined above
         <AppRouter />
     </Provider>
 );
+
+let hasRendered = false;
+const renderApp = () => {
+  if(!hasRendered){
+      ReactDOM.render(provider, document.querySelector("#app"));
+      hasRendered = true;
+  }
+};
+
 ReactDOM.render(<h4>Loading...</h4>, document.querySelector("#app"));
 
-store.dispatch(expenseActions.startGetExpenses()).then(() => {
-    ReactDOM.render(provider, document.querySelector("#app"));
-});
+
 
 //this executes when the authenticate state changes, like when somebody logging in or logging out
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged((user) => { //this runs each time the user visits the page for the first time
    if(user){
-       console.log('log in');
+       store.dispatch(authActions.login(user.uid));
+       store.dispatch(expenseActions.startGetExpenses()).then(() => {
+           renderApp();
+           if(history.location.pathname === '/'){ //if the user is currently on the login page, only then push them to the dashboard page
+              history.push('/dashboard');
+           }
+       });
+
    } else{
-       console.log('log out');
+       store.dispatch(authActions.logout());
+       renderApp();
+       history.push('/'); //use the exported history to push to the user to the home login page
    }
 });
 

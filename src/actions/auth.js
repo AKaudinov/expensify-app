@@ -11,7 +11,23 @@ export const startLogin = () => {
           }); //return the promise chain
   };
 };
-//
-// export const Login = () => {
-//
-// };
+
+export const login =(uid) => {
+  return {
+      type: 'LOGIN',
+      uid: uid
+  }
+};
+
+
+export const startLogOut = () => {
+  return dispatch => {
+      return firebase.auth().signOut(); //sign the user out of the application
+  }
+};
+
+export const logout = () => {
+    return {
+        type: 'LOGOUT'
+    }
+};

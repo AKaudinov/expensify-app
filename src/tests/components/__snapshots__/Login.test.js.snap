@@ -2,16 +2,16 @@
 
 exports[`should render login component 1`] = `
 <div>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <input
       type="text"
     />
     <input
       type="text"
     />
-    <button
-      onClick={[Function]}
-    >
+    <button>
       Login
     </button>
   </form>

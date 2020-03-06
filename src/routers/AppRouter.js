@@ -1,17 +1,22 @@
 import React from 'react';
 import Header from "../components/Header";
-import {BrowserRouter, Link, NavLink, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Router, Link, NavLink, Route, Switch} from "react-router-dom";
 import Login from "../components/Login";
 import ExpenseDashboard from "../components/ExpenseDashboard";
 import AddExpense from "../components/AddExpense";
 import EditExpense from "../components/EditExpense";
 import Help from "../components/Help";
 import NotFound from "../components/NotFound";
+import createHistory from 'history/createBrowserHistory'; //grab the history create browser history to create your own
+//browser history
 
+export const history = createHistory();
 
 const AppRouter = () => {
   return (
-      <BrowserRouter>
+      // <BrowserRouter>
+      <Router history={history}>
+          {/*use router instead of browser router, so we can provide our own history and export it*/}
           <div> {/*actually have a single element as react component expects*/}
               <Header/>
               <Switch>
@@ -25,7 +30,8 @@ const AppRouter = () => {
                   {/*switch goes through all routes one by one, and if it doesn't find any, it returns the always matching NotFoundPage component*/}
               </Switch>
           </div>
-      </BrowserRouter>
+      </Router>
+      // </BrowserRouter>
   );
 };
 

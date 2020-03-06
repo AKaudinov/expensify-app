@@ -7,8 +7,10 @@ import ReactShallowRenderer from 'react-test-renderer/shallow';
 //full DOM rendereing < allows interaction and renders all child components
 
 import React from 'react';
-import Header from '../../components/Header';
-import {shallow} from 'enzyme' //import shallow renderer from enzyme
+import {Header} from '../../components/Header';
+import {shallow} from 'enzyme'
+import expenses from "../fixtures/expenses";
+import {AddExpense} from "../../components/AddExpense"; //import shallow renderer from enzyme
 
 test('Should render Header correctly', () => {
    // const renderer = new ReactShallowRenderer();
@@ -18,8 +20,17 @@ test('Should render Header correctly', () => {
 
 
    //Enzyme testing
-   const wrapper = shallow(<Header />);
+   const wrapper = shallow(<Header logout={() => {}}/>);
    expect(wrapper).toMatchSnapshot(); //make enzyme work with the snapshots via enzyme-to-json library
+});
+
+//should call startLogout on button click
+test('Should call logout on button click', () => {
+   const logout = jest.fn();
+   const wrapper = shallow(<Header logout={logout}/>);
+   wrapper.find('button').simulate('click');
+
+   expect(logout).toHaveBeenCalled();
 });
 
 

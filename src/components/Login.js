@@ -15,10 +15,10 @@ export class Login extends React.Component{
     render(){
         return (
             <div>
-            <form>
+            <form onSubmit={this.onLogin}>
                 <input type="text"/>
                 <input type="text"/>
-                <button onClick={this.onLogin}>Login</button>
+                <button>Login</button>
             </form>
             </div>
         )
