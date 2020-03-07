@@ -16,8 +16,6 @@ export class Login extends React.Component{
         return (
             <div>
             <form onSubmit={this.onLogin}>
-                <input type="text"/>
-                <input type="text"/>
                 <button>Login</button>
             </form>
             </div>

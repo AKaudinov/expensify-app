@@ -27,6 +27,7 @@ export const startLogOut = () => {
 };
 
 export const logout = () => {
+    console.log('loggin out');
     return {
         type: 'LOGOUT'
     }

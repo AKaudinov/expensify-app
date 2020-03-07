@@ -6,6 +6,8 @@ import fireBaseDb from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([reduxThunk]);
 
+const userId = 'TestuserId';
+const defaultAuthState = {auth: {uid: userId}};
 
 beforeEach((done) => {
     const expensesData = {};
@@ -14,7 +16,8 @@ beforeEach((done) => {
        //destructure all the info from expense, assign an object to the id of the expense
         //firebase stores objects of objects, and not arrays, that's why
     });
-   fireBaseDb.ref('expenses').set(expensesData).then(()=> done());
+
+   fireBaseDb.ref(`users/${userId}/expenses`).set(expensesData).then(()=> done());
 });
 
 test('Should setup add expense action object with provided values', () => {
@@ -39,7 +42,7 @@ test('Should setup add expense action object with provided values', () => {
 
 test('should add expense to database and store', (done) => { //done tels Jest that this is a an async function
 
-    const store = createMockStore({}); //create an empty store
+    const store = createMockStore(defaultAuthState); //create an empty store
 
     const expenseData = {
       description: 'Mouse',
@@ -57,7 +60,7 @@ test('should add expense to database and store', (done) => { //done tels Jest th
                 ...expenseData
             }
         });
-        return fireBaseDb.ref(`expenses/${actions[0].expense.id}`).once('value'); //return firebase promise
+        return fireBaseDb.ref(`users/${userId}/expenses/${actions[0].expense.id}`).once('value'); //return firebase promise
     })
     .then(fireBaseSnapshot => {
         expect(fireBaseSnapshot.val()).toEqual(expenseData);
@@ -76,7 +79,7 @@ test('should add expense with default values to database and store', (done) => {
         createdAt: 0
     };
 
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
 
     store.dispatch(expenseActions.startAddExpense()).then(() => {
       const actions = store.getActions();
@@ -87,7 +90,7 @@ test('should add expense with default values to database and store', (done) => {
               ...defaultExpenseData
           }
       });
-      return fireBaseDb.ref(`expenses/${actions[0].expense.id}`).once('value');
+      return fireBaseDb.ref(`users/${userId}/expenses/${actions[0].expense.id}`).once('value');
     }).then(firebaseSnapshot => {
        expect(firebaseSnapshot.val()).toEqual(defaultExpenseData);
 
@@ -146,7 +149,7 @@ test('Should set up get expense action object with data', () => {
 });
 
 test('Should fetch expenses from firebase', (done) => {
-    const store = createMockStore({}); //no data needed in the store
+    const store = createMockStore(defaultAuthState); //no data needed in the store
     store.dispatch(expenseActions.startGetExpenses()).then(data => {
        const actions = store.getActions(); //get all the actions that were called in order after startGetExpenses action executed
         expect(actions[0]).toEqual({
@@ -158,7 +161,7 @@ test('Should fetch expenses from firebase', (done) => {
 });
 
 test('Should remove expense from firebase', (done) => {
-   const store = createMockStore({});
+   const store = createMockStore(defaultAuthState);
    store.dispatch(expenseActions.startRemoveExpense(expenses[0]))
        .then(() => {
            const actions = store.getActions();
@@ -167,7 +170,7 @@ test('Should remove expense from firebase', (done) => {
                id: expenses[0].id
            });
 
-           fireBaseDb.ref(`expenses/${expenses[0].id}`).once('value')
+           fireBaseDb.ref(`users/${userId}/expenses/${expenses[0].id}`).once('value')
                .then(snapshot => {
                    expect(snapshot.val()).toBeNull();
                });
@@ -176,7 +179,7 @@ test('Should remove expense from firebase', (done) => {
 });
 
 test('Should edit an expense in firebase', (done) => {
-   const store = createMockStore({});
+   const store = createMockStore(defaultAuthState);
 
    const updates = {
        description: 'This is an updated expense',
@@ -192,7 +195,7 @@ test('Should edit an expense in firebase', (done) => {
                updates: updates
            });
 
-           fireBaseDb.ref(`expenses/${expenses[0].id}`).once('value')
+           fireBaseDb.ref(`users/${userId}/expenses/${expenses[0].id}`).once('value')
                .then(snapshot => {
                     expect(snapshot.val()).toEqual({
                         id:expenses[0].id,

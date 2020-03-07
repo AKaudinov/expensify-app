@@ -15,7 +15,9 @@ export const addExpense = (expense) => ({
 
 
 export const startAddExpense = (expenseData = {}) => {
-  return dispatch => { //redux-thunk allows to return a function that accepts a dispatch parameter, which allows to dispatch other actions
+  return (dispatch, getState) => { //redux-thunk allows to return a function that accepts a dispatch parameter, which allows to dispatch other actions
+      const uid = getState().auth.uid;
+
       const {
           description = '',
           note = '',
@@ -25,7 +27,7 @@ export const startAddExpense = (expenseData = {}) => {
 
       const expense = {description, note, amount, createdAt};
 
-      return fireBaseDb.ref('expenses').push(expense).then(insertedExpenseRef => { //return the promise chain, so we can continue chaining if we want to
+      return fireBaseDb.ref(`users/${uid}/expenses`).push(expense).then(insertedExpenseRef => { //return the promise chain, so we can continue chaining if we want to
           dispatch(addExpense({
               id: insertedExpenseRef.key,
               ...expense
@@ -44,8 +46,9 @@ export const removeExpense = ({ id } = {}) => { //default to empty object if the
 
 //START_REMOVE_EXPENSE
 export const startRemoveExpense = ({ id } = {}) => {
-  return dispatch => {
-      return fireBaseDb.ref(`expenses/${id}`).remove()
+  return (dispatch, getState) => {
+      const userId = getState().auth.uid;
+      return fireBaseDb.ref(`users/${userId}/expenses/${id}`).remove()
           .then(() => {
               dispatch(removeExpense({id}))
           })
@@ -67,8 +70,9 @@ export const editExpense =(id, updates) => {
 
 //START_EDIT_EXPENSE
 export const startEditExpense = (id, updates) => {
-  return dispatch => {
-      return fireBaseDb.ref(`expenses/${id}`).update({
+  return (dispatch, getState) => {
+      const userId = getState().auth.uid;
+      return fireBaseDb.ref(`users/${userId}/expenses/${id}`).update({
           ...updates
       }).then(() => {
           dispatch(editExpense(id, updates))
@@ -87,9 +91,10 @@ export const getExpenses = (expenses) => {
 };
 
 export const startGetExpenses = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const userId = getState().auth.uid;
         const expenses = [];
-        return fireBaseDb.ref('expenses').once('value')
+        return fireBaseDb.ref(`users/${userId}/expenses`).once('value')
             //return the promise chain, so we can continue chaining in app.js, because it uses a then on `startGetExpenses` action
             .then(snapshot => {
                 snapshot.forEach(fireBaseExpense => {
