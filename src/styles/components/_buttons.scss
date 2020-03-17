@@ -1,0 +1,19 @@
+.standard-button{
+  padding: $s-size;
+  font-size: $font-size-large;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: $light-blue;
+  display: inline-block; //vertical margin and padding get taken into effect (top margin and padding)
+  line-height: 1; //button text always sits on one line, so no reason to have extra space
+}
+
+.secondary-button{
+  background-color: #888888;
+}
+
+.button--link{
+  background: none;
+}

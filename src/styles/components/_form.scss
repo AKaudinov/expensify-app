@@ -1,0 +1,15 @@
+.form{
+ display: flex;
+  flex-direction: column;
+
+  > * {
+    margin-bottom: $m-size;
+  } //direct descendants of the form (all direct children of the form)
+  //the save button won't get affected because it is surround by the div, and is therefore
+  //not a direct child of the form, but the div it sits inside, is
+}
+
+.form__error{
+  margin: 0 0 $m-size 0;
+  font-style: italic;
+}

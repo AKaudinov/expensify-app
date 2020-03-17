@@ -1,0 +1,27 @@
+.box-layout{
+  background: url('/images/bg.jpg'); //browser only has access to the public directory
+  height: 100vh; //view-port height, use 100% of the view-port height
+  width: 100vw; //view-port width, use 100% of the view-port width
+  background-size: cover; //cover the entire container with the image
+
+  //center everything
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.box-layout__box{
+  background: fade-out(white, .15);
+  border-radius: 3px;
+  text-align: center;
+  width: 25rem; //fixed width
+  padding: $l-size $m-size;
+}
+
+
+.box-layout__title{
+  margin: 0 0 $m-size 0;
+  line-height: 1; //all text has line height: space between the lines when there are multiple lines
+  //distribute the space below and above the box layout title
+}

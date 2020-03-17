@@ -1,6 +1,14 @@
 @import './base/settings';
 @import './base/base';
 //import partial css
+@import './components/box-layout';
+@import './components/buttons';
+@import './components/header';
+@import './components/page-header';
+@import './components/content-container';
+@import './components/input-group';
+@import './components/inputs';
+@import './components/form';
 
 .active-link{
   color: orange;

@@ -1,0 +1,20 @@
+.text-input{
+  border: 1px solid #cacccd;
+  height: 50px;
+  font-size: $font-size-large;
+  font-weight: 300; //thin font
+  padding: $s-size;
+}
+//browser accounts the height by reading the actual height, padding, and border as well and or margins
+//so in the end, a 50px height input isn't actually 50px, it's 50px + padding + margins + border
+
+
+.select{
+  @extend .text-input; //extend the class text above/reuse it
+}
+
+
+.textarea{
+  @extend .text-input;
+  height: 10rem; //100px
+}
