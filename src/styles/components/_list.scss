@@ -1,0 +1,71 @@
+.list-header{
+  background-color: $light-grey;
+  padding: $s-size $m-size;
+  border: 1px solid darken($light-grey, 7%);
+  color: $grey;
+  display: flex;
+  justify-content: space-between; //show stuff on the left and right, and have space in between those items
+}
+
+.list-body{
+  margin-bottom: $l-size;
+  @media (max-width: $mobile-breakpoint) {
+    margin-bottom: $m-size;
+  }
+}
+
+
+.list-item{
+  border: 1px solid darken($light-grey, 7%);
+  border-top: none; //don't need a border at the top since box above it will have borders on the bottom
+  display: flex;
+  color: $dark-grey;
+  text-decoration: none;
+  padding: $m-size;
+  transition: background-color .3s ease;
+  //transition: define 3 things: css property to transition, the amount of time for the transition to take, and the funciton you'll use
+  &:hover{
+    background-color: $light-grey;
+  }
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center; //align all items to center
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+    padding: $s-size;
+    align-items: flex-start; //on mobile align items to the start of the flex box, left side of it
+  }
+}
+
+.list-item--message{
+  @extend .list-item;
+  align-items: center; //center the items
+  justify-content: center;
+  color: $grey;
+  padding: $m-size;
+  &:hover{
+    background: none; //don't fade or transition for the message, it's not an actual link or an item
+  }
+}
+
+
+.list-item__title{
+  margin: 0;
+  //when a really long word is added, and are overflowing out of the parent element
+  //use the word-break so that the word breaks up and doesn't overflow
+  word-break: break-all;
+}
+
+.list-item__sub-title{
+  color: $grey;
+  font-size: $font-size-small; //14 px
+}
+
+
+.list-item__data{
+  @media (max-width: $mobile-breakpoint){
+    margin: $s-size 0 0 0; //only have margin at the top on mobile view port
+    padding: 0;
+  }
+  padding-left: $s-size;
+}

@@ -1,0 +1,12 @@
+.loader{
+  height: 100vh; //take all the view port height
+  width: 100vw; //take all the view port width
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader__image{
+height: 6rem;
+  width: 6rem;
+}

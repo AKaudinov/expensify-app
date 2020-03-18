@@ -1,50 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should not render ExpenseList with empty message 1`] = `
-<div>
-  <p>
-    No expenses
-  </p>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item--message"
+    >
+      <span>
+        No expenses
+      </span>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render ExpenseList with expenses 1`] = `
-<div>
-  <Connect(ExpenseListItem)
-    expense={
-      Object {
-        "amount": 195,
-        "createdAt": 0,
-        "description": "test1",
-        "id": "1",
-        "note": "",
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <Connect(ExpenseListItem)
+      expense={
+        Object {
+          "amount": 195,
+          "createdAt": 0,
+          "description": "test1",
+          "id": "1",
+          "note": "",
+        }
       }
-    }
-    key="1"
-  />
-  <Connect(ExpenseListItem)
-    expense={
-      Object {
-        "amount": 234,
-        "createdAt": -345600000,
-        "description": "test2",
-        "id": "2",
-        "note": "",
+      key="1"
+    />
+    <Connect(ExpenseListItem)
+      expense={
+        Object {
+          "amount": 234,
+          "createdAt": -345600000,
+          "description": "test2",
+          "id": "2",
+          "note": "",
+        }
       }
-    }
-    key="2"
-  />
-  <Connect(ExpenseListItem)
-    expense={
-      Object {
-        "amount": 193500,
-        "createdAt": 345600000,
-        "description": "Rent",
-        "id": "3",
-        "note": "",
+      key="2"
+    />
+    <Connect(ExpenseListItem)
+      expense={
+        Object {
+          "amount": 193500,
+          "createdAt": 345600000,
+          "description": "Rent",
+          "id": "3",
+          "note": "",
+        }
       }
-    }
-    key="3"
-  />
+      key="3"
+    />
+  </div>
 </div>
 `;

@@ -1,0 +1,11 @@
+.show-for-mobile{
+@media (min-width: $mobile-breakpoint){
+  display: none; //don't display the mobile due to minimum width being 450px(starting from), below 450 px start displaying it
+  }
+}
+
+.show-for-desktop{
+@media (max-width: $mobile-breakpoint - 0.1rem)  { //so both styles don't get applied at once
+    display: none; //don't display the desktop style due to max width being 450px(up to), after 450px start displaying it
+  }
+}

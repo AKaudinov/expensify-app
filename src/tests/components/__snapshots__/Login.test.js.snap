@@ -1,13 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render login component 1`] = `
-<div>
-  <form
-    onSubmit={[Function]}
+<div
+  className="box-layout"
+>
+  <div
+    className="box-layout__box"
   >
-    <button>
-      Login
-    </button>
-  </form>
+    <h1
+      className="box-layout__title"
+    >
+      Expensify
+    </h1>
+    <p>
+      It's time to get your expenses under control.
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <button
+        className="standard-button"
+      >
+        Login with Google
+      </button>
+    </form>
+  </div>
 </div>
 `;

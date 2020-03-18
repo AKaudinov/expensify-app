@@ -8,6 +8,7 @@ import * as expenseActions from './actions/expenses';
 import * as filterActions from './actions/filters';
 import * as authActions from './actions/auth';
 import getVisibleExpenses from "./selectors/expenses";
+import Loading from './components/Loading';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
@@ -41,7 +42,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<h4>Loading...</h4>, document.querySelector("#app"));
+ReactDOM.render(<Loading />, document.querySelector("#app"));
 
 
 
