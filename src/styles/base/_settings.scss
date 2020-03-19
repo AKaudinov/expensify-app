@@ -14,4 +14,14 @@ $s-size: 1.2rem;
 $m-size: 1.6rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
-$mobile-breakpoint: 45rem;
+
+$mobile-breakpoint: 45rem; //in media queries this 45rem isn't 450px, it will be 720px. media queries don't take into account the
+//calculations done in the stylings, in this case we made html font size 62.5% so 1 rem = 10 px.
+//where by default it is 1 rem = 16px << this is what the media queries will work like
+//therefore 45rem x 16rem = 720px.
+
+
+//Relative units in media queries are based on the initial value,
+// which means that units are never based on results of declarations.
+// For example, in HTML, the em unit is relative to the initial value of font-size,
+// defined by the user agent or the user’s preferences, not any styling on the page.

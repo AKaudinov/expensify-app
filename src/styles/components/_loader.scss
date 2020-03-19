@@ -2,11 +2,12 @@
   height: 100vh; //take all the view port height
   width: 100vw; //take all the view port width
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; //horizontal
+  align-items: center; //vertical
 }
 
 .loader__image{
 height: 6rem;
   width: 6rem;
 }
+
